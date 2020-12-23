@@ -1,0 +1,90 @@
+#!/bin/bash
+# BT Dev Machine Set up
+
+mkdir artifacts
+
+# Brew
+
+if ! which brew >/dev/null; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+brew update
+
+# Fish
+if ! which fish >/dev/null; then
+    brew install fish
+
+    # Init fish config
+    touch ~/.config/fish/config.fish
+fi
+
+# golang
+if ! which go >/dev/null; then
+    brew install golang
+fi
+echo -e "\nset -x GOPATH ~/repo" >>~/.config/fish/config.fish
+
+# fzy
+if ! which fzy >/dev/null; then
+    brew install fzy
+fi
+
+# gpg
+if ! which gpg >/dev/null; then
+    brew install gpg
+fi
+
+# GH CLI
+if ! which gh >/dev/null; then
+    brew install gh
+else
+    gh version
+fi
+
+# asdf
+if ! which gh >/dev/null; then
+    brew install coreutils curl git
+    brew install asdf
+else
+    asdf version
+fi
+
+echo -e "\nsource "$(brew --prefix asdf)"/asdf.fish" >>~/.config/fish/config.fish
+
+fish asdf-plugins.fish
+
+# Fisher
+curl -sL https://git.io/fisher >artifacts/fisherinstall
+
+fish artifacts/fisherinstall
+
+# Fisher plugins
+fish ./fisher-plugins.fish
+
+# AWS CLI
+if ! which aws >/dev/null; then
+    curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "artifacts/AWSCLIV2.pkg"
+    sudo installer -pkg artifacts/AWSCLIV2.pkg -target /
+fi
+
+# One Pass CLI
+if ! which op >/dev/null; then
+    curl https://cache.agilebits.com/dist/1P/op/pkg/v1.8.0/op_darwin_amd64_v1.8.0.pkg --output artifacts/op.pkg
+    sudo installer -pkg artifacts/op.pkg -target /
+fi
+
+# Kubie
+if ! which kubie >/dev/null; then
+    brew install kubie
+fi
+
+# kubectx
+if ! which kubectx >/dev/null; then
+    brew install kubectx
+fi
+
+# kubens
+if ! which kubens >/dev/null; then
+    brew install kubens
+fi
