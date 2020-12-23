@@ -1,7 +1,6 @@
 #!/usr/local/bin/fish
 
 # fisher plugins
-
 fisher install jorgebucaran/fisher
 fisher install oh-my-fish/plugin-aws
 fisher install mgoodness/plugin-asp
