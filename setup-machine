@@ -6,18 +6,18 @@ mkdir artifacts
 #!/usr/bin/env bash
 
 if [ "$(uname)" == "Darwin" ]; then
-    ./fish/darwin
+    bash fish/darwin
     fish core-pkgs/darwin.fish
     fish asdf/darwin.fish
     fish k8s/darwin.fish     
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    ./fish/ubuntu
+    bash fish/ubuntu
     fish core-pkgs/ubuntu.fish
     fish asdf/ubuntu.fish
     fish k8s/ubuntu.fish
 fi
 
 fish asdf-plugins.fish
-fish fisher-plugins
+fish fisher-plugins.fish
 
 fish github-subscriber.fish

@@ -1,4 +1,4 @@
-#!/usr/local/bin/fish
+#!fish
 
 sudo apt update
 
@@ -8,7 +8,7 @@ mkdir ~/repo
 
 # golang
 if ! which go >/dev/null
-    sudo apt install go
+    sudo apt install golang-go
 end
 
 echo -e "\nset -x GOPATH ~/repo" >>~/.config/fish/config.fish

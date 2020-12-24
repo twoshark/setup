@@ -11,9 +11,4 @@ if ! which fish >/dev/null; then
     touch ~/.config/fish/config.fish
 fi
 
-# fisher
-curl -sL https://git.io/fisher > artifacts/fisherinstall
-
-# plugins
-fish artifacts/fisherinstall
-
+fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher'

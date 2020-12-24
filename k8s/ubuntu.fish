@@ -16,5 +16,11 @@ if ! which kubens >/dev/null
 end
 
 if ! which stern >/dev/null
-    sudo apt install stern
+    sudo apt install govendor
+    mkdir -p $GOPATH/src/github.com/wercker
+    cd $GOPATH/src/github.com/wercker
+    git clone https://github.com/wercker/stern.git
+    cd stern
+    govendor sync
+    go install
 end
