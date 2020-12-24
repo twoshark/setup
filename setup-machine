@@ -3,24 +3,21 @@
 
 mkdir artifacts
 
-# Brew
+#!/usr/bin/env bash
 
-if ! which brew >/dev/null; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if [ "$(uname)" == "Darwin" ]; then
+    ./fish/darwin
+    fish core-pkgs/darwin.fish
+    fish asdf/darwin.fish
+    fish k8s/darwin.fish     
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    ./fish/ubuntu
+    fish core-pkgs/ubuntu.fish
+    fish asdf/ubuntu.fish
+    fish k8s/ubuntu.fish
 fi
 
-brew update
+fish asdf-plugins.fish
+fish fisher-plugins
 
-# fish
-./fish
-
-# rando basics
-./basics.fish
-
-# asdf managed packages
-./asdf.fish
-
-# kubernetes tools
-./k8s.fish
-
-./github-subscriber.fish
+fish github-subscriber.fish
