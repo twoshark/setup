@@ -8,7 +8,9 @@ mkdir ~/repo
 
 # golang
 if ! which go >/dev/null
-    sudo apt install golang-go
+    curl https://golang.org/dl/go1.15.6.linux-amd64.tar.gz --output artifacts/go.tar.gz
+    tar -C /usr/local -xzf artifacts/go.tar.gz
+    echo -e "\nset -s PATH $PATH:/usr/local/go/bin" >>~/.config/fish/config.fish
 end
 
 echo -e "\nset -x GOPATH ~/repo" >>~/.config/fish/config.fish
